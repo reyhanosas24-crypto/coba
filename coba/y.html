@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Permohonan Maaf Resmi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght=700&family=Montserrat:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f7ebe1;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .card-container {
+            background: #fffdf9;
+            width: 90%;
+            max-width: 410px;
+            min-height: 550px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(139, 94, 60, 0.15);
+            border: 1px solid #eadece;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .screen { display: none; width: 100%; text-align: center; animation: fadeIn 0.5s ease forwards; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* HEADER ORNAMEN */
+        .flower-ornamen { position: absolute; top: 10px; right: 10px; width: 60px; opacity: 0.8; }
+        .doc-tag { font-size: 10px; letter-spacing: 2px; color: #b86262; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; }
+
+        /* SCREEN 1: LOADING FLOWER */
+        .loader-circle { width: 120px; height: 120px; border: 2px solid #ecd9cc; border-radius: 50%; position: relative; animation: spin 4s linear infinite; display: flex; justify-content: center; align-items: center; }
+        .petal { width: 20px; height: 25px; background: #c84b55; border-radius: 0 50% 0 50%; position: absolute; transform-origin: center bottom; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* COMMON BUTTONS */
+        .btn-mewah { background-color: #b84a53; color: white; border: none; padding: 14px 28px; font-size: 14px; font-weight: 600; border-radius: 25px; cursor: pointer; letter-spacing: 1px; box-shadow: 0 5px 15px rgba(184,74,83,0.3); transition: all 0.2s; margin-top: 15px; width: 100%; text-transform: uppercase; }
+        .btn-mewah:hover { transform: scale(1.02); background-color: #a33e46; }
+
+        /* SCREEN 2: COVER */
+        .title-script { font-family: 'Dancing Script', cursive; font-size: 42px; color: #2c2c2c; margin: 10px 0; }
+        .wax-seal { width: 75px; height: 75px; background: radial-gradient(#df6b74, #912a31); border-radius: 50%; border: 2px dashed rgba(255,255,255,0.2); box-shadow: 0 5px 10px rgba(0,0,0,0.15); margin: 20px auto; position: relative; }
+        .wax-seal::after { content: '🙏'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.6); font-size: 24px; }
+
+        /* SCREEN 4: PASAL CARD */
+        .pasal-box { background: #fdfaf6; border: 1px solid #ebdccb; border-radius: 12px; padding: 15px; margin-bottom: 12px; text-align: left; position: relative; overflow: hidden; }
+        .pasal-num { width: 24px; height: 24px; background: #f3eae1; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 11px; font-weight: 700; color: #b84a53; margin-bottom: 5px; }
+        .pasal-text { font-size: 13px; color: #4a4a4a; font-style: italic; line-height: 1.5; margin: 0; }
+        .stamp-dicatat { position: absolute; right: 10px; top: 15px; border: 2px solid #c84b55; color: #c84b55; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; transform: rotate(-15deg); text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+
+        /* SCREEN 5: KEPUTUSAN */
+        .btn-males { background: #f7f1eb; color: #7a6e65; border: 1px solid #d3c5b9; position: absolute; width: auto; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.1s ease; }
+
+        /* SCREEN 6: STEMPEL TOK */
+        .stempel-popup { border: 3px solid #25a266; color: #25a266; font-size: 24px; font-weight: 700; padding: 10px 20px; border-radius: 8px; display: inline-block; transform: rotate(-8deg); letter-spacing: 2px; margin: 20px 0; animation: stomp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes stomp { 0% { transform: scale(3) rotate(-30deg); opacity: 0; } 100% { transform: scale(1) rotate(-8deg); opacity: 1; } }
+
+        /* SCREEN 7: SERTIFIKAT AKHIR */
+        .cert-border { border: 4px double #d1b194; padding: 15px; background: #fffdf9; border-radius: 6px; text-align: left; position: relative; }
+        .cert-row { margin-bottom: 12px; border-bottom: 1px dashed #e2d5c5; padding-bottom: 5px; }
+        .cert-label { font-size: 10px; color: #a19285; text-transform: uppercase; letter-spacing: 1px; }
+        .cert-value { font-size: 14px; font-weight: 600; color: #2c2c2c; margin-top: 2px; }
+        .btn-wa { background-color: #25D366; box-shadow: 0 5px 15px rgba(37,211,102,0.3); }
+        .btn-wa:hover { background-color: #20ba5a; }
+        .btn-secondary { background-color: transparent; color: #b84a53; border: 1px solid #b84a53; box-shadow: none; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="card-container" id="mainCard">
+        <div class="flower-ornamen">🌸</div>
+
+        <!-- SCREEN 1: LOADING -->
+        <div id="screen1" class="screen active">
+            <div class="loader-circle" id="flowerLoader"></div>
+            <p style="margin-top: 25px; font-size: 13px; color: #8d7b6e; letter-spacing: 1px;">Bentar ya, lagi loading surat damai...</p>
+        </div>
+
+        <!-- SCREEN 2: COVER -->
+        <div id="screen2" class="screen">
+            <div class="doc-tag">Surat Penyesalan • Dari Lubuk Hati</div>
+            <div class="title-script">Surat Minta Maaf</div>
+            <p style="font-size: 11px; letter-spacing: 2px; color: #888;">NO. 999/DIKY-RIRI/SORRY/2026</p>
+            <div class="wax-seal"></div>
+            <p style="font-size: 14px; color: #5a5a5a; margin-bottom: 30px;">Spesial Buat:<br><strong style="font-size: 18px; color:#2c2c2c;">RIANTI EKA SAPUTRI</strong></p>
+            <button class="btn-mewah" onclick="nextScreen(3)">Klik buat buka suratnya</button>
+        </div>
+
+        <!-- SCREEN 3: PERIHAL -->
+        <div id="screen3" class="screen">
+            <div class="doc-tag">Perihal</div>
+            <h2 style="font-weight: 600; color: #2c2c2c; margin-top: 5px;">Minta Maaf yang Tulus</h2>
+            <hr style="border: 0; border-top: 1px dashed #ecd9cc; margin: 20px 0;">
+            <p style="font-size: 14px; color: #555; line-height: 1.8; text-align: justify; font-style: italic;">
+                "Lewat surat ini, cowok yang kadang keras kepala, suka bikin pusing, dan banyak salah ini mau minta maaf yang sebesar-besarnya atas segala hal keliru yang udah dilakukan belakangan ini."
+            </p>
+            <p style="font-size: 12px; color: #a37f66; margin-top: 20px;">Plis Riri, baca dulu poin pertimbangan di halaman sebelah ya... 🥰</p>
+            <button class="btn-mewah" onclick="nextScreen(4)">Lihat Poin Garansi</button>
+        </div>
+
+        <!-- SCREEN 4: JANJI & GARANSI -->
+        <div id="screen4" class="screen">
+            <div class="doc-tag">Komitmen & Janji Perbaikan</div>
+            <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Sebagai bukti kalau aku nyesel, ini garansi resminya:</p>
+            
+            <div class="pasal-box">
+                <div class="pasal-num">1</div><span class="stamp-dicatat">Garansi</span>
+                <p class="pasal-text">Aku janji bakal jauh lebih sabar, dengerin omongan kamu, dan berusaha keras banget buat ga ngulangin kesalahan yang sama lagi.</p>
+            </div>
+            <div class="pasal-box">
+                <div class="pasal-num">2</div><span class="stamp-dicatat">Garansi</span>
+                <p class="pasal-text">Aku wajib ngejaga mood dan kenyamanan kamu, sori banget udah sempat bikin kamu kesel atau bete gara-gara tingkah aku.</p>
+            </div>
+            <div class="pasal-box">
+                <div class="pasal-num">3</div><span class="stamp-dicatat">Garansi</span>
+                <p class="pasal-text">Segala bentuk hukuman, omelan, atau syarat damai dari kamu statusnya mutlak dan bakal aku turutin sepenuhnya.</p>
+            </div>
+
+            <p style="font-size: 11px; color: #25a266; font-weight:600; margin: 15px 0;">✓ KOMITMEN FIX & SAH</p>
+            <button class="btn-mewah" onclick="nextScreen(5)">Lanjut ke Keputusan</button>
+        </div>
+
+        <!-- SCREEN 5: KEPUTUSAN -->
+        <div id="screen5" class="screen" style="position: relative; min-height: 350px;">
+            <div class="doc-tag">Sidang Putusan</div>
+            <h3 style="font-family: 'Dancing Script', cursive; font-size: 32px; color: #2c2c2c; margin-bottom: 40px;">
+                Gimana, Ri? Pintu maafnya udah kebuka murni 100% belum buat Diky?
+            </h3>
+            
+            <button class="btn-mewah" id="btnMauu" onclick="approveProcess()">IYA, UDAH DIMAAFIN ❤</button>
+            <button class="btn-males" id="btnMales" onmouseover="kaburTombol()" onclick="kaburTombol()">GA, MASIH KESEL BANGET!</button>
+            
+            <p style="font-size: 11px; color: #999; position: absolute; bottom: 0; width:100%; left:0;">Pencet tombol pilihan buat nentuin takdir ya 😉</p>
+        </div>
+
+        <!-- SCREEN 6: PROSES STEMPEL -->
+        <div id="screen6" class="screen">
+            <div class="stempel-popup">FIX DAMAI ✓</div>
+            <h2 class="title-script" style="font-size: 36px; color:#25a266;">Asik, Dimaafin! 🎉</h2>
+            <p style="font-size: 13px; color:#666;">Lagi nerbitin sertifikat bebas dari kesalahan...</p>
+        </div>
+
+        <!-- SCREEN 7: SERTIFIKAT AKHIR -->
+        <div id="screen7" class="screen">
+            <div class="cert-border">
+                <div class="doc-tag" style="text-align: center; margin-bottom: 5px;">Sertifikat Kehormatan</div>
+                <div class="title-script" style="font-size: 26px; text-align: center; margin: 0 0 15px 0;">Sertifikat Bebas Salah</div>
+                
+                <div class="cert-row">
+                    <div class="cert-label">Perihal</div>
+                    <div class="cert-value">Permohonan Maaf Tulus</div>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-label">Pihak yang Memohon</div>
+                    <div class="cert-value">Diky</div>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-label">Pihak yang Memaafkan</div>
+                    <div class="cert-value">RIRI (Cewek Paling Baik Sedunia 🥰)</div>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-label">Status Hubungan</div>
+                    <div class="cert-value" style="color: #25a266;">Udah Damai & Full Senyum murni 100%</div>
+                </div>
+                <div class="cert-row">
+                    <div class="cert-label">Tanggal Pengesahan</div>
+                    <div class="cert-value live-date"></div>
+                </div>
+
+                <p style="font-size: 11px; font-style: italic; color:#555; text-align: center; margin-top: 15px;">
+                    "Dinyatakan sah bebas dari segala salah dan dosa masa lalu. Makasih banyak ya Riri, kamu emang yang terbaik!"
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px;">
+                    <div class="wax-seal" style="width:45px; height:45px; margin:0; zoom:0.8; background: radial-gradient(#6bdf8a, #2a9147);"></div>
+                    <div style="font-family:'Dancing Script', cursive; font-size:20px; border-bottom:1px solid #333; padding:0 10px;">Riri</div>
+                </div>
+            </div>
+
+            <p style="font-size: 12px; color: #666; margin-top: 20px;">Kirim bukti perdamaian ini ke WhatsApp Diky yuk 💌</p>
+            <button class="btn-mewah btn-wa" onclick="kirimWhatsApp()">Kirim Bukti ke WhatsApp</button>
+            <button class="btn-mewah btn-secondary" onclick="window.print()">Simpan Screenshot 📸</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Set otomatis tanggal hari ini
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const tglHariIni = new Date().toLocaleDateString('id-ID', options);
+        document.querySelectorAll('.live-date').forEach(el => el.innerText = tglHariIni);
+
+        // Generate Kelopak Bunga Loader Screen 1
+        const loader = document.getElementById('flowerLoader');
+        for (let i = 0; i < 8; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.transform = `rotate(${i * 45}deg) translateY(-40px)`;
+            loader.appendChild(petal);
+        }
+
+        // Timer Otomatis ti Screen 1 ka Screen 2
+        setTimeout(() => {
+            nextScreen(2);
+        }, 3000);
+
+        // Fungsi navigasi pindah screen
+        function nextScreen(screenNum) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen' + screenNum).classList.add('active');
+        }
+
+        // Fungsi tombol "GA" kabur-kaburan pas dicabak
+        function kaburTombol() {
+            const btn = document.getElementById('btnMales');
+            const container = document.getElementById('screen5');
+            
+            const maxX = container.clientWidth - btn.clientWidth - 20;
+            const maxY = container.clientHeight - btn.clientHeight - 40;
+            
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(50, Math.floor(Math.random() * maxY));
+            
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        // Fungsi pas si doi nge-klik IYA DIMAAFIN
+        function approveProcess() {
+            nextScreen(6);
+            setTimeout(() => {
+                nextScreen(7);
+            }, 2500);
+        }
+
+        // Integrasi API WhatsApp otomatis kirim pesen
+        function kirimWhatsApp() {
+            const pesan = `Halo Diky! Surat Permohonan Maaf Resmi kamu udah aku periksa dan aku terima murni 100% ❤. Kamu resmi dimaafkan dan sertifikat pembebasannya udah sah! Awas aja ya kalau diulangin lagi yaaa 🥰🎉`;
+            const urlWA = `https://api.whatsapp.com/send?text=${encodeURIComponent(pesan)}`;
+            window.open(urlWA, '_blank');
+        }
+    </script>
+</body>
+</html>
